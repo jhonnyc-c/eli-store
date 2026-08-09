@@ -7,9 +7,9 @@
     "node": ">=22.5.0"
   },
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
-    "seed:admin": "node src/seed-admin.js"
+    "start": "node --experimental-sqlite src/server.js",
+    "dev": "node --experimental-sqlite --watch src/server.js",
+    "seed:admin": "node --experimental-sqlite src/seed-admin.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
