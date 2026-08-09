@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Iniciar sesión — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Iniciar sesión</h2>
+<% if (error) { %><div class="error-box"><%= error %></div><% } %>
+
+<form method="POST" action="/login">
+  <input type="hidden" name="next" value="<%= next %>" />
+  <div class="field">
+    <label>Correo</label>
+    <input type="email" name="email" required />
+  </div>
+  <div class="field">
+    <label>Contraseña</label>
+    <input type="password" name="password" required />
+  </div>
+  <button class="btn-primary" type="submit">Entrar</button>
+</form>
+
+<p style="text-align:center; margin-top:16px; font-size:13px; color:var(--muted);">
+  ¿No tienes cuenta? <a href="/register?next=<%= encodeURIComponent(next) %>" style="color:var(--brick);">Regístrate</a>
+</p>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,40 @@
+<%- include('../partials/header', { title: 'Productos — Admin — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Panel de administrador</h2>
+
+<div class="tabs">
+  <a href="/admin">Resumen</a>
+  <a href="/admin/products" class="active">Productos</a>
+  <a href="/admin/users">Usuarios</a>
+</div>
+
+<a href="/sell" class="btn-primary" style="margin-bottom:16px; display:flex;">+ Publicar producto nuevo</a>
+
+<% if (listings.length === 0) { %>
+  <div class="empty">Todavía no hay productos publicados.</div>
+<% } else { %>
+  <% listings.forEach(function(l) { %>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="row" style="border-top:none; padding-top:0;">
+        <span class="rn"><strong><%= l.name %></strong></span>
+        <span>Bs<%= l.price %></span>
+      </div>
+      <div class="cseller mono">
+        Vendedor: <%= l.seller_name %> · Stock: <%= l.stock %> · <%= l.status === 'agotado' ? 'Agotado' : 'En venta' %>
+      </div>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <a href="/product/<%= l.id %>" class="btn-outline">Ver</a>
+        <form method="POST" action="/admin/listings/<%= l.id %>/delete" onsubmit="return confirm('¿Eliminar esta prenda? No se puede deshacer.');">
+          <button class="btn-danger" type="submit">Eliminar</button>
+        </form>
+        <% if (l.status !== 'agotado') { %>
+        <form method="POST" action="/admin/listings/<%= l.id %>/mark-out-of-stock">
+          <button class="btn-outline" type="submit">Marcar agotado</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  <% }) %>
+<% } %>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,64 @@
+<%- include('partials/header', { title: 'Publicar prenda — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Publicar una prenda</h2>
+
+<% if (error) { %><div class="error-box"><%= error %></div><% } %>
+
+<form method="POST" action="/sell" enctype="multipart/form-data">
+  <div class="field">
+    <label>Nombre de la prenda</label>
+    <input name="name" placeholder="Ej. Chaqueta de mezclilla vintage" required />
+  </div>
+  <div class="field">
+    <label>Descripción (opcional)</label>
+    <textarea name="description" placeholder="Talla, estado, detalles…"></textarea>
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Precio por unidad (USD)</label>
+      <input name="price" type="number" min="1" step="0.01" placeholder="Ej. 45" required />
+    </div>
+    <div class="field">
+      <label>Unidades disponibles</label>
+      <input name="stock" type="number" min="1" step="1" value="1" required />
+    </div>
+  </div>
+  <div class="field">
+    <label>Categoría</label>
+    <select name="category">
+      <option>Chaquetas</option>
+      <option>Vestidos</option>
+      <option>Suéteres</option>
+      <option>Calzado</option>
+      <option>Otro</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Fotos (hasta 6, 5MB cada una)</label>
+    <label class="imgpicker">
+      📷 Toca para elegir fotos de la prenda
+      <input type="file" name="images" accept="image/*" multiple style="display:none;" onchange="previewImages(this)" />
+    </label>
+    <div class="img-thumbs" id="image-preview"></div>
+  </div>
+  <button class="btn-primary" type="submit">Publicar prenda</button>
+</form>
+
+<script>
+  function previewImages(input){
+    const preview = document.getElementById('image-preview');
+    preview.innerHTML = '';
+    Array.from(input.files).slice(0, 6).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const div = document.createElement('div');
+        div.className = 'img-thumb';
+        div.innerHTML = '<img src="' + e.target.result + '" />';
+        preview.appendChild(div);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+</script>
+
+<%- include('partials/footer') %>

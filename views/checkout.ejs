@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: 'Datos de entrega — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:6px;">Un paso más</h2>
+<p style="font-size:13px; color:var(--muted); margin-bottom:16px;">Necesitamos tus datos para coordinar la entrega.</p>
+
+<% if (error) { %><div class="error-box"><%= error %></div><% } %>
+
+<div class="card" style="margin-bottom:16px;">
+  <div class="row" style="border-top:none; padding-top:0;">
+    <span class="rn"><strong><%= listing.name %></strong></span>
+   <span>Bs. <%= listing.price %> c/u</span>
+  </div>
+  <div class="cseller mono">Cantidad: <%= qty %> · Total: Bs. <%= (listing.price * qty).toFixed(2) %></div>
+</div>
+
+<form method="POST" action="/checkout/<%= listing.id %>">
+  <input type="hidden" name="qty" value="<%= qty %>" />
+  <div class="field">
+    <label>Nombre completo</label>
+    <input name="buyer_name" required />
+  </div>
+  <div class="field">
+    <label>Teléfono / WhatsApp</label>
+    <input name="buyer_phone" type="tel" required />
+  </div>
+  <div class="field">
+    <label>Dirección de entrega</label>
+    <textarea name="buyer_address" required placeholder="Calle, número, referencia, ciudad…"></textarea>
+  </div>
+  <button class="btn-primary" type="submit">Continuar al pago</button>
+</form>
+
+<%- include('partials/footer') %>

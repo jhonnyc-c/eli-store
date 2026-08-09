@@ -1,0 +1,53 @@
+<%- include('../partials/header', { title: 'Admin — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Panel de administrador</h2>
+
+<div class="tabs">
+  <a href="/admin" class="active">Resumen</a>
+  <a href="/admin/products">Productos</a>
+  <a href="/admin/users">Usuarios</a>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="lbl">Ventas totales</div>
+    <div class="val mono">Bs<%= totals.total_gmv.toFixed(2) %></div>
+  </div>
+  <div class="stat-card">
+    <div class="lbl">Comisión ganada</div>
+    <div class="val mono" style="color:var(--brick);">Bs<%= totals.total_commission.toFixed(2) %></div>
+  </div>
+  <div class="stat-card">
+    <div class="lbl">Pedidos pagados</div>
+    <div class="val mono"><%= totals.total_orders %></div>
+  </div>
+  <div class="stat-card">
+    <div class="lbl">Usuarios / Prendas</div>
+    <div class="val mono"><%= usersCount %> / <%= listingsCount %></div>
+  </div>
+</div>
+
+<h3 style="font-size:16px; margin-bottom:10px;">Ventas recientes</h3>
+<% if (recentOrders.length === 0) { %>
+  <div class="empty">Todavía no hay ventas.</div>
+<% } else { %>
+  <table>
+    <thead>
+      <tr><th>Pedido</th><th>Prenda</th><th>Cant.</th><th>Comprador</th><th>Estado</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+      <% recentOrders.forEach(function(o) { %>
+        <tr>
+          <td class="mono"><%= o.order_number %></td>
+          <td><%= o.listing_name %></td>
+          <td><%= o.quantity %></td>
+          <td><%= o.buyer_name %></td>
+          <td><%= o.status === 'pagado' ? 'Pagado' : (o.status === 'pendiente_pago' ? 'Pendiente' : 'Cancelado') %></td>
+          <td>Bs<%= o.total_price.toFixed(2) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('../partials/footer') %>

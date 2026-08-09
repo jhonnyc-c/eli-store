@@ -1,0 +1,28 @@
+<%- include('partials/header', { title: 'Pagar con QR — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:6px;">Pagar pedido</h2>
+<div class="mono" style="font-size:12px; color:var(--muted); margin-bottom:16px;">Pedido <%= order.order_number %></div>
+
+<div class="split mono">
+  <div><span>Producto</span><span><%= listing.name %></span></div>
+  <div><span>Cantidad</span><span><%= order.quantity %></span></div>
+  <div><span>Total a pagar</span><span>Bs<%= order.total_price.toFixed(2) %></span></div>
+</div>
+
+<div class="qr-box">
+  <img src="/images/qr-pago.jpg" alt="Código QR para pagar" />
+  <div class="qr-info">
+    Escanea este código con tu app bancaria (Yolo Pago / Banco Ganadero).<br/>
+    Cuenta a nombre de: <strong>Jhonny Cordova Cunurana</strong><br/>
+    Monto a transferir: <strong>Bs<%= order.total_price.toFixed(2) %></strong>
+  </div>
+</div>
+
+<form method="POST" action="/checkout/pay/<%= order.id %>/confirm" style="margin-top:18px;">
+  <button class="btn-primary" type="submit">Ya pagué</button>
+</form>
+<p style="text-align:center; font-size:11.5px; color:var(--muted); margin-top:10px;">
+  Toca "Ya pagué" solo después de haber hecho la transferencia con tu app.
+</p>
+
+<%- include('partials/footer') %>

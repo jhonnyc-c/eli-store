@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title><%= typeof title !== 'undefined' ? title : 'Eli Store' %></title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D6336C" stroke-width="2"><path d="M20 8V6a4 4 0 1 0-8 0v2"/><path d="M4 8h16l1 12H3z"/></svg>
+    Eli Store
+  </a>
+  <% if (user) { %>
+    <a href="/sell" class="pill">Vender</a>
+  <% } else { %>
+    <a href="/login" class="pill">Entrar</a>
+  <% } %>
+</header>
+
+<main>

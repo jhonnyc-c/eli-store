@@ -1,0 +1,30 @@
+<%- include('partials/header', { title: 'Comprobante — Eli Store' }) %>
+
+<div class="receipt">
+  <div class="receipt-head">
+    <div class="check">✅</div>
+    <h2 style="font-size:19px; margin-top:6px;">Comprobante de compra</h2>
+    <div class="receipt-num">N° <%= order.order_number %></div>
+  </div>
+
+  <div class="receipt-row"><span class="lbl">Producto</span><span><%= order.listing_name %></span></div>
+  <div class="receipt-row"><span class="lbl">Cantidad</span><span><%= order.quantity %></span></div>
+  <div class="receipt-row"><span class="lbl">Precio unitario</span><span>Bs<%= order.unit_price.toFixed(2) %></span></div>
+  <div class="receipt-row"><span class="lbl">Vendedor</span><span><%= order.seller_name %></span></div>
+  <div class="receipt-row"><span class="lbl">Estado</span><span><%= order.status === 'pagado' ? 'Pagado' : 'Pendiente de pago' %></span></div>
+  <div class="receipt-row"><span class="lbl">Fecha</span><span><%= new Date(order.created_at * 1000).toLocaleString('es-BO') %></span></div>
+
+  <div class="receipt-total"><span>Total</span><span>Bs<%= order.total_price.toFixed(2) %></span></div>
+
+  <div style="margin-top:18px; padding-top:14px; border-top:1px dashed var(--line);">
+    <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px;">Datos de entrega</div>
+    <div class="receipt-row"><span class="lbl">Nombre</span><span><%= order.buyer_name %></span></div>
+    <div class="receipt-row"><span class="lbl">Teléfono</span><span><%= order.buyer_phone %></span></div>
+    <div class="receipt-row"><span class="lbl">Dirección</span><span style="text-align:right; max-width:60%;"><%= order.buyer_address %></span></div>
+  </div>
+</div>
+
+<a class="btn-primary" href="/profile" style="margin-top:18px; display:flex;">Ver mis compras</a>
+<a class="btn-secondary" href="/">Seguir explorando</a>
+
+<%- include('partials/footer') %>

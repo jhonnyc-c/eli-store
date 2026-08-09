@@ -1,0 +1,8 @@
+node_modules/
+percha.db
+percha.db-*
+.env
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+!uploads/.gitkeep

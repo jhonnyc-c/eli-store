@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: 'Eli Store — Tu tienda de ropa' }) %>
+
+<div class="hero">
+  <div class="eyebrow">Eli Store</div>
+  <h1>Ropa que te queda<br/>como anillo al dedo.</h1>
+  <p>Elige tu prenda favorita, la cantidad que quieras, y paga fácil con QR.</p>
+</div>
+
+<form method="GET" action="/" class="searchbar" style="margin-top:20px;">
+  <input name="q" value="<%= q %>" placeholder="Buscar chaqueta, vestido, botas…" />
+</form>
+
+<section class="block">
+  <h2>Catálogo</h2>
+  <% if (listings.length === 0) { %>
+    <div class="empty">Aún no hay prendas publicadas. <a href="/sell" style="color:var(--brick);">¡Publica la primera!</a></div>
+  <% } else { %>
+    <div class="grid">
+      <% listings.forEach(function(p) { %>
+        <div class="card">
+          <div class="tag">Bs<%= p.price %></div>
+          <% if (p.status === 'agotado' || p.stock <= 0) { %><div class="sold-badge">Agotado</div><% } %>
+          <a href="/product/<%= p.id %>" class="swatch">
+            <% if (p.images.length) { %>
+              <img src="<%= p.images[0] %>" alt="<%= p.name %>" />
+            <% } else { %>
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#D6336C" stroke-width="1.4"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+            <% } %>
+          </a>
+          <div class="cname"><%= p.name %></div>
+          <div class="cseller mono"><%= p.seller_name %></div>
+          <% if (p.status !== 'agotado' && p.stock > 0) { %>
+            <div class="cstock mono"><%= p.stock %> disponible<%= p.stock === 1 ? '' : 's' %></div>
+          <% } %>
+          <a class="btn-small" href="/product/<%= p.id %>"><%= (p.status === 'agotado' || p.stock <= 0) ? 'Ver detalle' : 'Ver / Comprar' %></a>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,36 @@
+<%- include('../partials/header', { title: 'Usuarios — Admin — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Panel de administrador</h2>
+
+<div class="tabs">
+  <a href="/admin">Resumen</a>
+  <a href="/admin/products">Productos</a>
+  <a href="/admin/users" class="active">Usuarios</a>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Cambiar rol</th></tr>
+  </thead>
+  <tbody>
+    <% users.forEach(function(u) { %>
+      <tr>
+        <td><%= u.name %></td>
+        <td><%= u.email %></td>
+        <td><span class="role-badge mono"><%= u.role %></span></td>
+        <td>
+          <form method="POST" action="/admin/users/<%= u.id %>/role" style="display:flex; gap:6px;">
+            <select name="role" style="padding:6px; border-radius:6px; border:1px solid var(--line); font-size:12px;">
+              <option value="comprador" <%= u.role==='comprador'?'selected':'' %>>comprador</option>
+              <option value="vendedor" <%= u.role==='vendedor'?'selected':'' %>>vendedor</option>
+              <option value="admin" <%= u.role==='admin'?'selected':'' %>>admin</option>
+            </select>
+            <button class="btn-small" type="submit">Guardar</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

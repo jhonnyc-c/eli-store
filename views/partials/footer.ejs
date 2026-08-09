@@ -1,0 +1,25 @@
+</main>
+
+<div class="bottomnav">
+  <a class="navitem <%= currentPath === '/' ? 'active' : '' %>" href="/">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    Inicio
+  </a>
+  <a class="navitem <%= currentPath === '/sell' ? 'active' : '' %>" href="/sell">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 8V6a4 4 0 1 0-8 0v2"/><path d="M4 8h16l1 12H3z"/></svg>
+    Vender
+  </a>
+  <a class="navitem <%= currentPath === '/profile' ? 'active' : '' %>" href="<%= user ? '/profile' : '/login' %>">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+    Perfil
+  </a>
+  <% if (user && user.role === 'admin') { %>
+  <a class="navitem <%= currentPath.startsWith('/admin') ? 'active' : '' %>" href="/admin">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+    Admin
+  </a>
+  <% } %>
+</div>
+
+</body>
+</html>

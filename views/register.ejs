@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: 'Crear cuenta — Eli Store' }) %>
+
+<h2 style="font-size:22px; margin-bottom:16px;">Crear cuenta</h2>
+<% if (error) { %><div class="error-box"><%= error %></div><% } %>
+
+<form method="POST" action="/register">
+  <input type="hidden" name="next" value="<%= next %>" />
+  <div class="field">
+    <label>Nombre</label>
+    <input name="name" required />
+  </div>
+  <div class="field">
+    <label>Correo</label>
+    <input type="email" name="email" required />
+  </div>
+  <div class="field">
+    <label>Contraseña (mínimo 6 caracteres)</label>
+    <input type="password" name="password" minlength="6" required />
+  </div>
+  <div class="field">
+    <label>¿Cómo quieres usar Eli Store?</label>
+    <select name="role">
+      <option value="comprador">Solo quiero comprar</option>
+      <option value="vendedor">Quiero vender mi ropa</option>
+    </select>
+  </div>
+  <button class="btn-primary" type="submit">Crear cuenta</button>
+</form>
+
+<p style="text-align:center; margin-top:16px; font-size:13px; color:var(--muted);">
+  ¿Ya tienes cuenta? <a href="/login?next=<%= encodeURIComponent(next) %>" style="color:var(--brick);">Inicia sesión</a>
+</p>
+
+<%- include('partials/footer') %>
