@@ -18,7 +18,7 @@
   <% } %>
   <div class="total">
     <span class="mono" style="font-size:13px; color:#e4b9cb;">📈 Ganancia total (ventas pagadas)</span>
-    <span class="val">Bs<%= totalEarnings %></span>
+    <span class="val">Bs. <%= totalEarnings %></span>
   </div>
 </div>
 
@@ -35,7 +35,7 @@
       <a href="/receipt/<%= o.id %>" class="card" style="display:block; margin-bottom:10px;">
         <div class="row" style="border-top:none; padding-top:0;">
           <span class="rn"><strong><%= o.listing_name %></strong></span>
-          <span>Bs<%= o.total_price.toFixed(2) %></span>
+          <span>Bs. <%= o.total_price.toFixed(2) %></span>
         </div>
         <div class="cseller mono">
           <%= o.quantity %> unidad<%= o.quantity > 1 ? 'es' : '' %> ·

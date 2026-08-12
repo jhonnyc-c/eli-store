@@ -11,11 +11,11 @@
 <div class="stat-grid">
   <div class="stat-card">
     <div class="lbl">Ventas totales</div>
-    <div class="val mono">Bs<%= totals.total_gmv.toFixed(2) %></div>
+    <div class="val mono">Bs. <%= totals.total_gmv.toFixed(2) %></div>
   </div>
   <div class="stat-card">
     <div class="lbl">Comisión ganada</div>
-    <div class="val mono" style="color:var(--brick);">Bs<%= totals.total_commission.toFixed(2) %></div>
+    <div class="val mono" style="color:var(--brick);">Bs. <%= totals.total_commission.toFixed(2) %></div>
   </div>
   <div class="stat-card">
     <div class="lbl">Pedidos pagados</div>
@@ -43,7 +43,7 @@
           <td><%= o.quantity %></td>
           <td><%= o.buyer_name %></td>
           <td><%= o.status === 'pagado' ? 'Pagado' : (o.status === 'pendiente_pago' ? 'Pendiente' : 'Cancelado') %></td>
-          <td>Bs<%= o.total_price.toFixed(2) %></td>
+          <td>Bs. <%= o.total_price.toFixed(2) %></td>
         </tr>
       <% }) %>
     </tbody>

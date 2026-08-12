@@ -18,7 +18,7 @@
     <div class="grid">
       <% listings.forEach(function(p) { %>
         <div class="card">
-          <div class="tag">Bs<%= p.price %></div>
+          <div class="tag">Bs. <%= p.price %></div>
           <% if (p.status === 'agotado' || p.stock <= 0) { %><div class="sold-badge">Agotado</div><% } %>
           <a href="/product/<%= p.id %>" class="swatch">
             <% if (p.images.length) { %>

@@ -6,15 +6,15 @@
 <div class="split mono">
   <div><span>Producto</span><span><%= listing.name %></span></div>
   <div><span>Cantidad</span><span><%= order.quantity %></span></div>
-  <div><span>Total a pagar</span><span>Bs<%= order.total_price.toFixed(2) %></span></div>
+  <div><span>Total a pagar</span><span>Bs. <%= order.total_price.toFixed(2) %></span></div>
 </div>
 
 <div class="qr-box">
-  <img src="/images/QR_PAGOS.jpeg" alt="Código QR para pagar" />
+  <img src="/images/qr-pago.jpg" alt="Código QR para pagar" />
   <div class="qr-info">
     Escanea este código con tu app bancaria (Yolo Pago / Banco Ganadero).<br/>
     Cuenta a nombre de: <strong>Jhonny Cordova Cunurana</strong><br/>
-    Monto a transferir: <strong>Bs<%= order.total_price.toFixed(2) %></strong>
+    Monto a transferir: <strong>Bs. <%= order.total_price.toFixed(2) %></strong>
   </div>
 </div>
 
