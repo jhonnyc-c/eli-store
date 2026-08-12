@@ -4,16 +4,16 @@ const db = require('../db');
 const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-cambia-esto-en-produccion';
 
 // Lee el token de la cookie (si existe) y adjunta req.user
-function loadUser(req, res, next) {
+async function loadUser(req, res, next) {
   const token = req.cookies && req.cookies.token;
   req.user = null;
   if (token) {
     try {
       const payload = jwt.verify(token, JWT_SECRET);
-      const user = db.prepare('SELECT id, name, email, role FROM users WHERE id = ?').get(payload.id);
+      const user = await db.prepare('SELECT id, name, email, role FROM users WHERE id = ?').get(payload.id);
       if (user) req.user = user;
     } catch (e) {
-      // token inválido o expirado: se ignora, req.user queda null
+      // token invalido o expirado, o error de base de datos: se ignora, req.user queda null
     }
   }
   res.locals.user = req.user; // disponible en todas las vistas EJS

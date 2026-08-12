@@ -3,6 +3,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
+const db = require('./db');
 const { loadUser } = require('./middleware/auth');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
@@ -33,13 +34,21 @@ app.use((req, res) => {
   res.status(404).render('error', { message: 'Página no encontrada.' });
 });
 
-// Manejador de errores (ej. archivos demasiado grandes en multer)
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).render('error', { message: err.message || 'Algo salió mal.' });
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Eli Store corriendo en http://localhost:${PORT}`);
+
+async function start() {
+  await db.initSchema();
+  app.listen(PORT, () => {
+    console.log(`Eli Store corriendo en http://localhost:${PORT}`);
+  });
+}
+
+start().catch((err) => {
+  console.error('No se pudo iniciar el servidor:', err);
+  process.exit(1);
 });
